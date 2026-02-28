@@ -18,42 +18,6 @@ VS Code extension providing rich language support for **Drools Rule Language (DR
 - **Java 17+** -- the language server runs as a Java process
 - **drools-lsp shaded JAR** -- built from the [`drools-lsp`](https://github.com/apache/incubator-kie-drools/tree/main/drools-lsp) module in the Drools repository
 
-## Setup
-
-### 1. Build the Language Server
-
-Clone the Drools repository and build the language server:
-
-```bash
-git clone https://github.com/apache/incubator-kie-drools.git
-cd incubator-kie-drools
-mvn clean package -pl drools-lsp -am -DskipTests
-```
-
-This produces `drools-lsp/target/drools-lsp-999-SNAPSHOT-shaded.jar`.
-
-### 2. Place the JAR
-
-Copy the fat JAR into the extension's `server/` directory:
-
-```bash
-mkdir -p server
-cp /path/to/incubator-kie-drools/drools-lsp/target/drools-lsp-*-shaded.jar server/drools-lsp-shaded.jar
-```
-
-Or set the `drools.lsp.serverPath` setting to point to the JAR wherever it lives on disk.
-
-### 3. Install and Compile the Extension
-
-```bash
-npm install
-npm run compile
-```
-
-### 4. Run
-
-Press `F5` in VS Code to launch an Extension Development Host, then open any `.drl` file.
-
 ## Extension Settings
 
 | Setting | Type | Default | Description |
@@ -68,7 +32,6 @@ The extension registers the `.drl` file extension as language ID `drl`. Files ar
 ## Related Projects
 
 - [incubator-kie-drools](https://github.com/apache/incubator-kie-drools) -- the Drools engine and `drools-lsp` language server
-- [drools-lsp-intellij-plugin](https://github.com/apache/drools-lsp-intellij-plugin) -- IntelliJ IDEA plugin for DRL
 
 ## License
 
