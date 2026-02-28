@@ -3,7 +3,7 @@
   "displayName": "Drools DRL Language Support",
   "description": "Language support for Drools Rule Language (DRL) files - autocomplete, diagnostics, go-to-definition, and hover documentation",
   "version": "0.1.0",
-  "publisher": "apache-kie",
+  "publisher": "SubhanshuBansal",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
