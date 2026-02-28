@@ -1,0 +1,193 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Drools Rule Language",
+  "scopeName": "source.drl",
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#strings" },
+    { "include": "#package" },
+    { "include": "#import" },
+    { "include": "#global" },
+    { "include": "#rule" },
+    { "include": "#query" },
+    { "include": "#declare" },
+    { "include": "#function" },
+    { "include": "#keywords" },
+    { "include": "#attributes" },
+    { "include": "#operators" },
+    { "include": "#annotations" },
+    { "include": "#numbers" },
+    { "include": "#variables" }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.double-slash.drl",
+          "match": "//.*$"
+        },
+        {
+          "name": "comment.block.drl",
+          "begin": "/\\*",
+          "end": "\\*/"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.drl",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.drl",
+              "match": "\\\\."
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.single.drl",
+          "begin": "'",
+          "end": "'",
+          "patterns": [
+            {
+              "name": "constant.character.escape.drl",
+              "match": "\\\\."
+            }
+          ]
+        }
+      ]
+    },
+    "package": {
+      "match": "^\\s*(package)\\s+([a-zA-Z_][a-zA-Z0-9_.]*)",
+      "captures": {
+        "1": { "name": "keyword.other.package.drl" },
+        "2": { "name": "entity.name.namespace.drl" }
+      }
+    },
+    "import": {
+      "match": "^\\s*(import)\\s+(static\\s+|function\\s+)?([a-zA-Z_][a-zA-Z0-9_.]*(?:\\.\\*)?)",
+      "captures": {
+        "1": { "name": "keyword.other.import.drl" },
+        "2": { "name": "keyword.other.import.modifier.drl" },
+        "3": { "name": "entity.name.type.drl" }
+      }
+    },
+    "global": {
+      "match": "^\\s*(global)\\s+([a-zA-Z_][a-zA-Z0-9_.<>,\\s]*)\\s+([a-zA-Z_][a-zA-Z0-9_]*)",
+      "captures": {
+        "1": { "name": "keyword.other.global.drl" },
+        "2": { "name": "storage.type.drl" },
+        "3": { "name": "variable.other.global.drl" }
+      }
+    },
+    "rule": {
+      "begin": "^\\s*(rule)\\s+",
+      "beginCaptures": {
+        "1": { "name": "keyword.control.rule.drl" }
+      },
+      "end": "(?=\\n)",
+      "patterns": [
+        { "include": "#strings" },
+        {
+          "name": "entity.name.function.rule.drl",
+          "match": "[a-zA-Z_][a-zA-Z0-9_ ]*"
+        }
+      ]
+    },
+    "query": {
+      "begin": "^\\s*(query)\\s+",
+      "beginCaptures": {
+        "1": { "name": "keyword.control.query.drl" }
+      },
+      "end": "(?=\\n)",
+      "patterns": [
+        { "include": "#strings" },
+        {
+          "name": "entity.name.function.query.drl",
+          "match": "[a-zA-Z_][a-zA-Z0-9_ ]*"
+        }
+      ]
+    },
+    "declare": {
+      "match": "^\\s*(declare)\\s+(trait\\s+|type\\s+)?([a-zA-Z_][a-zA-Z0-9_]*)",
+      "captures": {
+        "1": { "name": "keyword.control.declare.drl" },
+        "2": { "name": "keyword.other.modifier.drl" },
+        "3": { "name": "entity.name.type.declaration.drl" }
+      }
+    },
+    "function": {
+      "match": "^\\s*(function)\\s+([a-zA-Z_][a-zA-Z0-9_.<>]*)\\s+([a-zA-Z_][a-zA-Z0-9_]*)",
+      "captures": {
+        "1": { "name": "keyword.control.function.drl" },
+        "2": { "name": "storage.type.return.drl" },
+        "3": { "name": "entity.name.function.drl" }
+      }
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.drl",
+          "match": "\\b(when|then|end|and|or|not|exists|forall|from|collect|accumulate|acc|eval|over|groupby|in|unit)\\b"
+        },
+        {
+          "name": "keyword.other.action.drl",
+          "match": "\\b(insert|insertLogical|update|delete|retract|modify|drools)\\b"
+        },
+        {
+          "name": "keyword.other.entry-point.drl",
+          "match": "\\b(entry-point|window)\\b"
+        },
+        {
+          "name": "constant.language.drl",
+          "match": "\\b(true|false|null)\\b"
+        }
+      ]
+    },
+    "attributes": {
+      "match": "^\\s*(salience|enabled|no-loop|lock-on-active|auto-focus|agenda-group|activation-group|ruleflow-group|date-effective|date-expires|dialect|duration|timer|calendars)\\b",
+      "captures": {
+        "1": { "name": "keyword.other.attribute.drl" }
+      }
+    },
+    "operators": {
+      "patterns": [
+        {
+          "name": "keyword.operator.constraint.drl",
+          "match": "\\b(matches|memberOf|contains|excludes|soundslike|str)\\b"
+        },
+        {
+          "name": "keyword.operator.temporal.drl",
+          "match": "\\b(after|before|coincides|during|includes|finishes|finishedby|meets|metby|overlaps|overlappedby|starts|startedby)\\b"
+        },
+        {
+          "name": "keyword.operator.comparison.drl",
+          "match": "(==|!=|>=|<=|>|<)"
+        }
+      ]
+    },
+    "annotations": {
+      "match": "@([a-zA-Z_][a-zA-Z0-9_]*)",
+      "captures": {
+        "0": { "name": "meta.annotation.drl" },
+        "1": { "name": "storage.type.annotation.drl" }
+      }
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "name": "constant.numeric.drl",
+          "match": "\\b\\d+(\\.\\d+)?([BILdfs])?\\b"
+        }
+      ]
+    },
+    "variables": {
+      "match": "(\\$[a-zA-Z_][a-zA-Z0-9_]*)",
+      "captures": {
+        "1": { "name": "variable.other.binding.drl" }
+      }
+    }
+  }
+}
